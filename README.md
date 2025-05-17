@@ -1,61 +1,79 @@
 # js-module-extractor
 
-**js-module-extractor** is a lightweight Python utility for extracting and formatting JavaScript modules from a plain text file. It targets lines that use the `__d("moduleName", ...)` pattern, extracting the module name, beautifying the code, and saving it to individual `.js` files.
+**js-module-extractor** is a lightweight Python CLI tool that extracts and beautifies JavaScript modules from a plain text file. It scans for lines using the pattern `__d("moduleName", ...)`, extracts the module name, formats the code, and writes each module to a separate `.js` file.
 
 ## Features
 
-* Detects and extracts lines beginning with `__d("...")`.
-* Uses regular expressions to determine the module name.
-* Beautifies the code using `jsbeautifier` for readability.
-* Saves each module to a separate `.js` file in the `output_modules` directory.
+* Detects JavaScript module definitions in `__d("...")` format
+* Extracts and saves each module into its own file
+* Beautifies the code using [jsbeautifier](https://pypi.org/project/jsbeautifier/)
+* CLI usage via `js-module-extractor` command
 
-## Requirements
+## Installation
 
-* Python 3.6 or higher
-* [jsbeautifier](https://pypi.org/project/jsbeautifier/)
-
-Install the required dependency:
+Install directly from the GitHub repository:
 
 ```bash
-pip install jsbeautifier
+pip install git+https://github.com/maxipalacios/js-module-extractor.git
 ```
 
 ## Usage
 
+After installing, you can run it from the command line:
+
 ```bash
-python module_generator.py input_file.txt
+js-module-extractor input_file.txt
 ```
 
-* `input_file.txt`: A UTF-8 text file containing one or more lines with `__d("moduleName", ...)` JavaScript module definitions.
+* `input_file.txt`: A UTF-8 encoded text file with one or more `__d("moduleName", ...)` lines.
 
 ## Output
 
-The script creates an `output_modules/` folder (if it doesn’t exist already) and writes each extracted module into its own file. Files are named using the module name (e.g., `MyModule.js`) and contain the formatted module content.
-
-## Example
-
-Given an input line like:
-
-```javascript
-__d("MyModule", function(global, require, module, exports) { /* module code */ }, 123);
-```
-
-The script will generate:
+The tool will create a folder named `output_modules/` (if not already present) and generate one file per module:
 
 ```
 output_modules/
 └── MyModule.js
 ```
 
-## Logging
+Each file contains beautified code extracted from the original input.
 
-The script provides logging messages to indicate:
+## Example
 
-* When it starts and finishes
-* If the output folder is created
-* Each module successfully processed
-* Any lines that couldn't be parsed
-* Errors encountered during processing
+Input line:
+
+```js
+__d("MyModule", function(global, require, module, exports) { /* code */ }, 123);
+```
+
+Command:
+
+```bash
+js-module-extractor modules.txt
+```
+
+Result:
+
+```
+output_modules/
+└── MyModule.js
+```
+
+## Development Setup
+
+Clone the repo and install in editable mode:
+
+```bash
+git clone https://github.com/maxipalacios/js-module-extractor.git
+cd js-module-extractor
+pip install -e .
+```
+
+Run locally:
+
+```bash
+js-module-extractor path/to/input.txt
+```
 
 ## License
 

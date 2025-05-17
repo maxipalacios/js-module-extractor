@@ -6,7 +6,7 @@ import re
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python module_generator.py input_file.txt")
+        print("Usage: js-module-extractor input_file.txt")
         return
 
     # Configure logging

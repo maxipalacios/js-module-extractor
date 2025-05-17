@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='module_generator',
+    name='js-module-extractor',
     version='0.1.0',
-    description='JavaScript module generator from a text file.',
+    description='CLI tool to extract and beautify JavaScript modules from a text file.',
     author='Maximiliano Palacios',
-    url='https://github.com/maxipalacios/module_generator',
+    url='https://github.com/maxipalacios/js-module-extractor',
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
     install_requires=[
@@ -13,7 +13,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'module_generator=module_generator:main',
+            'js-module-extractor=main:main',
         ],
     },
     classifiers=[
